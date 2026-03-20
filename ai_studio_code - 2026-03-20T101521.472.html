@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAI K | International Model Portfolio</title>
+    <!-- Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,900;1,400&family=Montserrat:wght@100;300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --gold: #d4af37;
+            --black: #080808;
+            --white: #ffffff;
+            --grey: #151515;
+            --accent: #ff0050;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--black);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden; /* For snap scroll */
+        }
+
+        /* Full Page Snap Scroll Container */
+        .main-container {
+            height: 100vh;
+            overflow-y: scroll;
+            scroll-snap-type: y mandatory;
+        }
+
+        section {
+            height: 100vh;
+            width: 100%;
+            scroll-snap-align: start;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 3D Parallax Background Text */
+        .parallax-bg {
+            position: absolute;
+            font-family: 'Bodoni Moda', serif;
+            font-size: 20vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            z-index: 0;
+            pointer-events: none;
+            white-space: nowrap;
+            transition: 0.1s ease-out;
+        }
+
+        /* --- PAGE 1: THE ELITE LOOK --- */
+        #home { background: radial-gradient(circle at center, #1a1a1a 0%, #000 100%); }
+
+        .hero-layout {
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            max-width: 1200px;
+            padding: 0 50px;
+        }
+
+        .image-3d-frame {
+            position: relative;
+            width: 380px;
+            height: 520px;
+            perspective: 1000px;
+        }
+
+        .actual-image {
+            width: 100%;
+            height: 100%;
+            background: url('https://i.ibb.co/S43825HK/file-000000006acc71fab3c0cf6fdda95f57.png') center/cover;
+            border-radius: 5px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+            transform-style: preserve-3d;
+            transition: 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .image-3d-frame:hover .actual-image {
+            transform: rotateY(15deg) rotateX(5deg) translateZ(20px);
+            border-color: var(--gold);
+        }
+
+        .frame-border {
+            position: absolute;
+            top: -20px; left: -20px; bottom: -20px; right: -20px;
+            border: 1px solid var(--gold);
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        .hero-text h4 {
+            color: var(--gold);
+            letter-spacing: 8px;
+            font-weight: 300;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero-text h1 {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 6rem;
+            line-height: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .hero-text h1 span { color: var(--gold); font-style: italic; }
+
+        /* --- PAGE 2: MARKET REACH --- */
+        .stats-container {
+            display: flex;
+            gap: 40px;
+            z-index: 2;
+        }
+
+        .stat-card {
+            background: var(--grey);
+            padding: 50px;
+            border-top: 4px solid var(--gold);
+            text-align: center;
+            width: 250px;
+            transition: 0.4s;
+        }
+
+        .stat-card:hover { transform: translateY(-20px); background: #222; }
+        .stat-card h2 { font-family: 'Bodoni Moda', serif; font-size: 4rem; color: var(--gold); }
+        .stat-card p { letter-spacing: 3px; font-size: 0.7rem; opacity: 0.6; }
+
+        /* --- PAGE 3: BRANDING EMPIRE --- */
+        .biz-box {
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(10px);
+            padding: 60px;
+            max-width: 900px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            z-index: 2;
+        }
+
+        .biz-box h3 { font-family: 'Bodoni Moda', serif; font-size: 3rem; margin-bottom: 20px; }
+        .gold-line { width: 80px; height: 3px; background: var(--gold); margin-bottom: 30px; }
+
+        /* --- PAGE 4: BOOKING --- */
+        .booking-ui { text-align: center; z-index: 2; }
+        .email-display {
+            font-family: 'Bodoni Moda', serif;
+            font-size: 3.5rem;
+            color: var(--white);
+            text-decoration: none;
+            display: block;
+            margin: 40px 0;
+            transition: 0.3s;
+        }
+        .email-display:hover { color: var(--gold); letter-spacing: 2px; }
+
+        .btn-hire {
+            border: 1px solid var(--gold);
+            padding: 20px 60px;
+            color: var(--gold);
+            text-decoration: none;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: 0.4s;
+        }
+        .btn-hire:hover { background: var(--gold); color: black; }
+
+        /* Floating Nav Dots */
+        .nav-dots {
+            position: fixed; right: 40px; top: 50%; transform: translateY(-50%); z-index: 100;
+        }
+        .dot { 
+            width: 10px; height: 10px; border: 1px solid var(--gold); border-radius: 50%; margin: 20px 0; 
+            cursor: pointer; transition: 0.3s;
+        }
+        .dot.active { background: var(--gold); box-shadow: 0 0 15px var(--gold); transform: scale(1.4); }
+
+        @media (max-width: 900px) {
+            .hero-layout { flex-direction: column; text-align: center; gap: 30px; }
+            .hero-text h1 { font-size: 3.5rem; }
+            .image-3d-frame { width: 260px; height: 350px; }
+            .stats-container { flex-direction: column; }
+            .email-display { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="nav-dots">
+        <div class="dot active" onclick="jump(0)"></div>
+        <div class="dot" onclick="jump(1)"></div>
+        <div class="dot" onclick="jump(2)"></div>
+        <div class="dot" onclick="jump(3)"></div>
+    </div>
+
+    <div class="main-container" id="scrollContainer">
+        
+        <!-- PAGE 1: THE IDENTITY -->
+        <section id="home">
+            <div class="parallax-bg" id="bg1">MODEL</div>
+            <div class="hero-layout">
+                <div class="image-3d-frame">
+                    <div class="frame-border"></div>
+                    <div class="actual-image"></div>
+                </div>
+                <div class="hero-text">
+                    <h4>Professional Artist</h4>
+                    <h1>SAI <span>K</span></h1>
+                    <p style="opacity: 0.5; letter-spacing: 4px;">@me_sai_kolhapuri6</p>
+                    <p style="margin-top: 20px; line-height: 1.8; font-weight: 300; max-width: 400px;">
+                        Redefining fashion aesthetics and digital marketing excellence in one cohesive vision.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: THE AUDIENCE -->
+        <section id="stats">
+            <div class="parallax-bg" style="right: -10%;">INFLUENCE</div>
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h2>43.7K</h2>
+                    <p>FOLLOWERS</p>
+                </div>
+                <div class="stat-box" style="width: 2px; background: rgba(212,175,55,0.2);"></div>
+                <div class="stat-card">
+                    <h2>779</h2>
+                    <p>PRODUCTIONS</p>
+                </div>
+                <div class="stat-box" style="width: 2px; background: rgba(212,175,55,0.2);"></div>
+                <div class="stat-card">
+                    <h2>96</h2>
+                    <p>CONNECTS</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: THE EMPIRE -->
+        <section id="business">
+            <div class="parallax-bg" style="left: -5%; top: 30%;">MARKETING</div>
+            <div class="biz-box">
+                <h3>Branding Marketing <br>Company Owner</h3>
+                <div class="gold-line"></div>
+                <p style="font-size: 1.2rem; line-height: 1.8; font-weight: 300; color: #ccc;">
+                    Expert in social media page management and strategic branding. 
+                    Converting visual appeal into business growth. 
+                    We manage legacies, not just pages.
+                </p>
+                <div style="margin-top: 30px; display: flex; gap: 20px; color: var(--gold);">
+                    <span><i class="fas fa-check-circle"></i> Paid Collaborations</span>
+                    <span><i class="fas fa-check-circle"></i> Brand Strategy</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: BOOKING -->
+        <section id="contact">
+            <div class="booking-ui">
+                <p style="letter-spacing: 10px; opacity: 0.6;">LET'S WORK TOGETHER</p>
+                <a href="mailto:sai5510vs@gmail.com" class="email-display">sai5510vs@gmail.com</a>
+                <p style="margin-bottom: 50px; font-weight: 200;">Available for Premium Campaigns & Business Consultations</p>
+                <a href="mailto:sai5510vs@gmail.com" class="btn-hire">Book Now</a>
+                
+                <div style="margin-top: 80px; opacity: 0.3; display: flex; justify-content: center; gap: 30px;">
+                    <i class="fab fa-instagram fa-2x"></i>
+                    <i class="fab fa-linkedin fa-2x"></i>
+                    <i class="fab fa-whatsapp fa-2x"></i>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        const container = document.getElementById('scrollContainer');
+        const dots = document.querySelectorAll('.dot');
+        const bgTexts = document.querySelectorAll('.parallax-bg');
+
+        // Snap Scroll Dot Sync
+        container.addEventListener('scroll', () => {
+            const index = Math.round(container.scrollTop / window.innerHeight);
+            dots.forEach(d => d.classList.remove('active'));
+            dots[index].classList.add('active');
+        });
+
+        function jump(idx) {
+            container.scrollTo({
+                top: idx * window.innerHeight,
+                behavior: 'smooth'
+            });
+        }
+
+        // Parallax Mouse Effect
+        document.addEventListener('mousemove', (e) => {
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
+            
+            bgTexts.forEach(txt => {
+                txt.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>
